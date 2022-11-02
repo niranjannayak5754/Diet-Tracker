@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shadycoding.core.R
 import com.shadycoding.core.domain.preferences.Preferences
-import com.shadycoding.core.domain.use_case.FilterOutDigits
 import com.shadycoding.core.navigation.Route
 import com.shadycoding.core.util.UiEvent
 import com.shadycoding.core.util.UiText
@@ -29,14 +28,14 @@ class WeightViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onWeightEnter(weight: String) {
-        if (weight.length <= 3) {
+        if (weight.length <= 5) {
             this.weight = weight
         }
     }
 
     fun onNextClick() {
         viewModelScope.launch {
-            val weightNumber = weight.toIntOrNull() ?: kotlin.run {
+            val weightNumber = weight.toFloatOrNull() ?: kotlin.run {
                 _uiEvent.send(
                     UiEvent.ShowSnackbar(
                         UiText.StringResource(R.string.error_weight_cant_be_empty)
@@ -44,7 +43,7 @@ class WeightViewModel @Inject constructor(
                 )
                 return@launch
             }
-            preferences.saveHeight(weightNumber)
+            preferences.saveWeight(weightNumber)
             _uiEvent.send(UiEvent.Navigate(Route.ACTIVITY))
         }
     }

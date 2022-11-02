@@ -13,8 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import com.shadycoding.core.navigation.Route
 import com.shadycoding.diet_tracker.navigation.navigate
 import com.shadycoding.diet_tracker.ui.theme.DietTrackerTheme
+import com.shadycoding.onboarding_presentation.activity.ActivityScreen
 import com.shadycoding.onboarding_presentation.age.AgeScreen
 import com.shadycoding.onboarding_presentation.gender.GenderScreen
+import com.shadycoding.onboarding_presentation.goal.GoalScreen
 import com.shadycoding.onboarding_presentation.height.HeightScreen
 import com.shadycoding.onboarding_presentation.weight.WeightScreen
 import com.shadycoding.onboarding_presentation.welcome.WelcomeScreen
@@ -63,10 +65,11 @@ class MainActivity : ComponentActivity() {
 
                         }
                         composable(Route.ACTIVITY) {
+                            ActivityScreen(onNavigate = navController::navigate)
 
                         }
                         composable(Route.GOAL) {
-
+                            GoalScreen(onNavigate = navController::navigate)
                         }
 
                         composable(Route.TRACKER_OVERVIEW) {
