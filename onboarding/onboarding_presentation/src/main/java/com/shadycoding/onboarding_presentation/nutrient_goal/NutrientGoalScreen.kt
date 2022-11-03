@@ -49,31 +49,39 @@ fun NutrientGoalScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.what_are_your_nutrient_goals), style =
-                MaterialTheme.typography.h3
+                text = stringResource(id = R.string.what_are_your_nutrient_goals),
+                style = MaterialTheme.typography.h3
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = "40",
-                onValueChange = {},
+                onValueChange = {
+                                viewModel.onEvent(NutrientGoalEvent.OnCarbRatioEnter(it))
+                },
                 unit = stringResource(id = R.string.percent_carbs)
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = "30",
-                onValueChange = {},
+                onValueChange = {
+                                viewModel.onEvent(NutrientGoalEvent.OnProteinRatioEnter(it))
+                },
                 unit = stringResource(id = R.string.percent_proteins)
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = "30",
-                onValueChange = {},
+                onValueChange = {
+                                viewModel.onEvent(NutrientGoalEvent.OnFatRatioEnter(it))
+                },
                 unit = stringResource(id = R.string.percent_fats)
             )
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = {  },
+            onClick = {
+                      viewModel.onEvent(NutrientGoalEvent.OnNextClick)
+            },
             modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
