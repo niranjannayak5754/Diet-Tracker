@@ -1,6 +1,12 @@
 package com.shadycoding.tracker_data.di
 
+import android.app.Application
+import androidx.room.Room
+import com.shadycoding.tracker_data.local.TrackerDao
+import com.shadycoding.tracker_data.local.TrackerDatabase
 import com.shadycoding.tracker_data.remote.OpenFoodApi
+import com.shadycoding.tracker_data.repository.TrackerRepositoryImpl
+import com.shadycoding.tracker_domain.repository.TrackerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,5 +43,27 @@ object TrackerDataModule {
             .client(client)
             .build()
             .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrackerDatabase(app: Application): TrackerDatabase{
+        return Room.databaseBuilder(
+            app,
+            TrackerDatabase::class.java,
+            "tracker_db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrackerRepository(
+        api: OpenFoodApi,
+        db: TrackerDatabase
+    ): TrackerRepository{
+        return TrackerRepositoryImpl(
+            dao = db.dao,
+            api = api
+        )
     }
 }
