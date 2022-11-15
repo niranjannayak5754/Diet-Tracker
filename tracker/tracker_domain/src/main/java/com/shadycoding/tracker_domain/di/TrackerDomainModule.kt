@@ -18,8 +18,8 @@ object TrackerDomainModule {
     fun provideTrackerUseCase(
         repository: TrackerRepository,
         preferences: Preferences
-    ): TrackerUseCase {
-        return TrackerUseCase(
+    ): TrackerUseCases {
+        return TrackerUseCases(
             trackFood = TrackFood(repository),
             searchFood = SearchFood(repository),
             getFoodsForDate = GetFoodsForDate(repository),

@@ -3,7 +3,7 @@ package com.shadycoding.diet_tracker.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.shadycoding.core.domain.DefaultPreferences
+import com.shadycoding.core.data.preferences.DefaultPreferences
 import com.shadycoding.core.domain.preferences.Preferences
 import com.shadycoding.core.domain.use_case.FilterOutDigits
 import dagger.Module
